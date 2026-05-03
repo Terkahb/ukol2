@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Úkoly</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f5e6d3, #e8d8c3);
+  overflow: hidden;
+}
+
+/* ❤️ SRDÍČKA */
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.bg span {
+  position: absolute;
+  font-size: 30px;
+  opacity: 0.25;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(110vh); }
+  100% { transform: translateY(-20vh); }
+}
+
+/* BOX */
+.box {
+  background: rgba(255,255,255,0.7);
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  width: 90%;
+  max-width: 340px;
+}
+
+/* TEXT */
+h2 { margin: 0; }
+
+.note {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 5px;
+}
+
+/* INPUT */
+input {
+  margin-top: 10px;
+  padding: 10px;
+  width: 90%;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+}
+
+/* BUTTON */
+button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 90%;
+  border: none;
+  border-radius: 10px;
+  background: #8c6a5d;
+  color: white;
+  cursor: pointer;
+}
+
+/* LINK */
+a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #8c6a5d;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+/* GRATULUJI */
+#msg {
+  margin-top: 15px;
+  font-weight: bold;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg" id="hearts"></div>
+
+<div class="box">
+  <h2 id="title">Úkol č.2</h2>
+  <span class="note" id="note">(malá písmena a s mezerou)</span>
+
+  <input id="input">
+  <button id="btn" onclick="check()">Potvrdit</button>
+
+  <div id="msg">Gratuluji 🎉</div>
+
+  <div id="linkBox"></div>
+</div>
+
+<script>
+
+/* ❤️ srdíčka */
+const hearts = document.getElementById("hearts");
+for (let i = 0; i < 30; i++) {
+  let s = document.createElement("span");
+  s.innerHTML = "❤️";
+  s.style.left = Math.random()*100 + "%";
+  s.style.animationDuration = (6 + Math.random()*10) + "s";
+  hearts.appendChild(s);
+}
+
+let step = 2;
+
+function showCongrats(nextStep, titleText, noteText) {
+  const msg = document.getElementById("msg");
+  msg.style.display = "block";
+
+  setTimeout(() => {
+    msg.style.display = "none";
+
+    document.getElementById("title").innerText = titleText;
+    document.getElementById("input").value = "";
+
+    const note = document.getElementById("note");
+
+    if (noteText) {
+      note.style.display = "block";
+      note.innerText = noteText;
+    } else {
+      note.style.display = "none";
+    }
+
+    step = nextStep;
+  }, 1500);
+}
+
+function check() {
+  let val = document.getElementById("input").value.toLowerCase();
+
+  if (step === 2) {
+    if (val === "cokoladovna janek") {
+      showCongrats(3, "Úkol č.3", "(malá písmena a mezery)");
+    } else alert("Špatně!");
+  }
+
+  else if (step === 3) {
+    if (val === "adelitas lucemburská!") {
+      showCongrats(4, "Úkol č.4", null);
+    } else alert("Špatně!");
+  }
+
+  else if (step === 4) {
+    if (val === "podívej se do dárkové tašky") {
+      showCongrats(5, "Úkol č.5", "(malá písmena)");
+    } else alert("Špatně!");
+  }
+
+  else if (step === 5) {
+    if (val === "automat matuška") {
+
+      document.getElementById("msg").style.display = "block";
+
+      setTimeout(() => {
+        document.getElementById("msg").style.display = "none";
+
+        document.getElementById("title").innerText = "Úkol č.6";
+        document.getElementById("note").style.display = "none";
+        document.getElementById("input").style.display = "none";
+        document.getElementById("btn").style.display = "none";
+
+        document.getElementById("linkBox").innerHTML =
+          '<a href="https://terkahb.github.io/Tajna-stranka/" target="_blank">Pokračovat 💌</a>';
+
+      }, 1500);
+
+    } else alert("Špatně!");
+  }
+}
+</script>
+
+</body>
+</html>
