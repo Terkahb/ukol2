@@ -78,17 +78,6 @@ button {
   cursor: pointer;
 }
 
-/* LINK */
-a {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 15px;
-  background: #8c6a5d;
-  color: white;
-  border-radius: 10px;
-  text-decoration: none;
-}
-
 /* GRATULUJI */
 #msg {
   margin-top: 15px;
@@ -110,8 +99,6 @@ a {
   <button id="btn" onclick="check()">Potvrdit</button>
 
   <div id="msg">Gratuluji 🎉</div>
-
-  <div id="linkBox"></div>
 </div>
 
 <script>
@@ -130,6 +117,7 @@ let step = 2;
 
 function showCongrats(nextStep, titleText, noteText) {
   const msg = document.getElementById("msg");
+  msg.innerText = "Gratuluji 🎉";
   msg.style.display = "block";
 
   setTimeout(() => {
@@ -174,22 +162,19 @@ function check() {
 
   else if (step === 5) {
     if (val === "automat matuška") {
+      showCongrats(6, "Úkol č.6", "zadej slovo na 4 písmena - kam jedeme teď?");
+    } else alert("Špatně!");
+  }
 
-      document.getElementById("msg").style.display = "block";
+  else if (step === 6) {
+    if (val === "domů") { 
+      const msg = document.getElementById("msg");
+      msg.innerText = "Jseš nejšikovnější luštitel! Čeká tě překvapení ve schránce! ❤️";
+      msg.style.display = "block";
 
-      setTimeout(() => {
-        document.getElementById("msg").style.display = "none";
-
-        document.getElementById("title").innerText = "Úkol č.6";
-        document.getElementById("note").style.display = "none";
-        document.getElementById("input").style.display = "none";
-        document.getElementById("btn").style.display = "none";
-
-        document.getElementById("linkBox").innerHTML =
-          '<a href="https://terkahb.github.io/Tajna-stranka/" target="_blank">Pokračovat 💌</a>';
-
-      }, 1500);
-
+      document.getElementById("input").style.display = "none";
+      document.getElementById("btn").style.display = "none";
+      document.getElementById("note").style.display = "none";
     } else alert("Špatně!");
   }
 }
